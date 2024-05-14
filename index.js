@@ -1,8 +1,10 @@
 const express = require('express');
 const { connect, disconnect } = require("mongoose");
+const cors = require("cors");
 const { userRouter } = require('./routes/usersRoutes');
 
 const app = express();
+app.use(cors());
 // Приложение использует json для обмена данными
 app.use(express.json());
 
