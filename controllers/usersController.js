@@ -39,7 +39,13 @@ const authorization = async (req, res) => {
     return res.status(200).json({ token });
 }
 
+const me = async (req, res) => {
+    if(!req.user) return res.status(403).json({error : "Нет информации"});
+    return res.status(200).json({user : req.user});
+}
+
 module.exports = {
     registration,
-    authorization
+    authorization,
+    me
 }
