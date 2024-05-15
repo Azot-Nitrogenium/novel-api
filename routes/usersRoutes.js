@@ -4,8 +4,8 @@ const { auth } = require("../middlewares/auth");
 
 const userRouter = Router();
 
-userRouter.post('/registration', registration);
 // к пути(маршруту) регистрации подключается функция регистрации. с авториз. тоже самое
+userRouter.post('/registration', registration);
 userRouter.post('/authorization', authorization);
 userRouter.get('/me', auth, me);
 

@@ -2,6 +2,7 @@ const express = require('express');
 const { connect, disconnect } = require("mongoose");
 const cors = require("cors");
 const { userRouter } = require('./routes/usersRoutes');
+const { storyRouter } = require('./routes/storyRoutes');
 
 const app = express();
 app.use(cors());
@@ -9,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', userRouter);
+app.use('/story', storyRouter);
 
 const main = async () => {
     try{
