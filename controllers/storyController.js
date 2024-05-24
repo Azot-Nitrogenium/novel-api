@@ -1,4 +1,4 @@
-import { Frame } from "../models/frameModel";
+const { Frame } = require("../models/frameModel");
 
 const getStory = async (req, res) => {
     const storyFile = require("../story.json");
