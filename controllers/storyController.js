@@ -1,9 +1,11 @@
 const { Frame } = require("../models/frameModel");
 
 const getStory = async (req, res) => {
-    const storyFile = require("../story.json");
-    const story = JSON.stringify(storyFile);
-    res.status(200).json({ story });
+    // const storyFile = require("../story.json");
+    // const story = JSON.stringify(storyFile);
+    // res.status(200).json({ story });
+    const story = Frame.find();
+    return res.status(200).json({ story });
 }
 
 const addFrame = async (req, res) => {
