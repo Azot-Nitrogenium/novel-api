@@ -7,9 +7,9 @@ const frameSchema = new Schema({
     heroes : [String],
     answers : [{
         text : String,
-        way : Types.ObjectId
+        way : String
     }],
-    way : Types.ObjectId
+    way : String
 });
 
 module.exports = {
