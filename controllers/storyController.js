@@ -5,8 +5,7 @@ const getStory = async (req, res) => {
     // const story = JSON.stringify(storyFile);
     // res.status(200).json({ story });
     const frames = await Frame.find();
-    console.log(story);
-    const story = JSON.stringify(frames)
+    const story = JSON.stringify(frames);
     return res.status(200).json({ story });
 }
 
