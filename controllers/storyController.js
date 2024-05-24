@@ -4,7 +4,7 @@ const getStory = async (req, res) => {
     // const storyFile = require("../story.json");
     // const story = JSON.stringify(storyFile);
     // res.status(200).json({ story });
-    const story = Frame.find();
+    const story = await Frame.find();
     console.log(story);
     return res.status(200).json({ story });
 }
