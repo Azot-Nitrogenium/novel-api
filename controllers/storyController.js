@@ -40,8 +40,24 @@ const addWay = async (req, res) => {
     return res.status(404).json({message : "Отсутствуют нужные слайды"});
 }
 
+const addAnswerWay = async (req, res) => {
+    if(!req.body) return res.status(400).json({error : "Нет данных"});
+    const { from, answerId, to } = req.body;
+    const frameFrom = await Frame.findById(from);
+    const answer = frameFrom.answers.find(ans => ans._id == answerId);
+    const frameTo = await Frame.findById(to);
+    if(frameFrom && frameTo && answer){
+        answer.way = frameTo._id;
+        await answer.save();
+        await frameFrom.save();
+        return res.status(201).json({message : "Путь добавлен!"});
+    }
+    return res.status(404).json({message : "Отсутствуют нужные слайды"});
+}
+
 module.exports = {
     getStory,
     addFrame,
-    addWay
+    addWay,
+    addAnswerWay
 }
