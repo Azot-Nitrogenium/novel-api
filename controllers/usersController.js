@@ -2,6 +2,7 @@ const { hash, compare } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const { config } = require("dotenv");
 const { User } = require('../models/userModel');
+const { Save } = require('../models/saveModel');
 
 config();
 
@@ -44,8 +45,21 @@ const me = async (req, res) => {
     return res.status(200).json({user : req.user});
 }
 
+const save = async (req, res) => {
+    if(!req.body) return res.status(400).json({error : "Нет данных"});
+    const { frame } = req.body;
+    const user = req.user.id;
+    // Если нужен лимит на сохранения
+    // const userSaves = await Save.find({ user });
+    // if(userSaves.length >= 6) return res.status(401).json({error : "Слишком много сохранений"});
+    const save = new Save({user, frame});
+    await save.save();
+    return res.status(201).json({message : "Успешно сохранено"})
+}
+
 module.exports = {
     registration,
     authorization,
-    me
+    me,
+    save
 }
