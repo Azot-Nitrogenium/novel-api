@@ -27,7 +27,21 @@ const addFrame = async (req, res) => {
     }
 }
 
+const addWay = async (req, res) => {
+    if(!req.body) return res.status(400).json({error : "Нет данных"});
+    const { from, to } = req.body;
+    const frameFrom = await Frame.findById(from);
+    const frameTo = await Frame.findById(to);
+    if(frameFrom && frameTo){
+        frameFrom.way = frameTo._id;
+        await frameFrom.save();
+        return res.status(201).json({message : "Путь добавлен!"});
+    }
+    return res.status(404).json({message : "Отсутствуют нужные слайды"});
+}
+
 module.exports = {
     getStory,
-    addFrame
+    addFrame,
+    addWay
 }
