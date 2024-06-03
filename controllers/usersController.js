@@ -67,6 +67,7 @@ const deleteSave = async (req, res) => {
     if(!req.body) return res.status(400).json({error : "Нет данных"});
     const { id } = req.body;
     const user = req.user.id;
+    console.log(id, user);
     const save = await Save.findOne({user, _id : id});
     if(!save) return res.status(404).json({error : "Сохранение не найдено"});
     await Save.findByIdAndDelete(save._id);
