@@ -63,10 +63,21 @@ const getSaves = async (req, res) => {
     return res.status(200).json({ saves });
 }
 
+const deleteSave = async (req, res) => {
+    if(!req.body) return res.status(400).json({error : "Нет данных"});
+    const { id } = req.body;
+    const user = req.user.id;
+    const save = await Save.findOne({user, _id : id});
+    if(!save) return res.status(404).json({error : "Сохранение не найдено"});
+    await Save.findByIdAndDelete(save._id);
+    return res.status(200).json({message : "Удалено!"});
+}
+
 module.exports = {
     registration,
     authorization,
     me,
     save,
-    getSaves
+    getSaves,
+    deleteSave
 }
