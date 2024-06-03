@@ -57,9 +57,16 @@ const save = async (req, res) => {
     return res.status(201).json({message : "Успешно сохранено"})
 }
 
+const getSaves = async (req, res) => {
+    const user = req.user.id;
+    const saves = Save.find({ user });
+    return res.status(200).json({ saves });
+}
+
 module.exports = {
     registration,
     authorization,
     me,
-    save
+    save,
+    getSaves
 }
