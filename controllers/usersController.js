@@ -59,7 +59,7 @@ const save = async (req, res) => {
 
 const getSaves = async (req, res) => {
     const user = req.user.id;
-    const saves = Save.find({ user });
+    const saves = await Save.find({ user });
     return res.status(200).json({ saves });
 }
 
