@@ -50,8 +50,8 @@ const save = async (req, res) => {
     const { frame } = req.body;
     const user = req.user.id;
     // Если нужен лимит на сохранения
-    // const userSaves = await Save.find({ user });
-    // if(userSaves.length >= 6) return res.status(401).json({error : "Слишком много сохранений"});
+    const userSaves = await Save.find({ user });
+    if(userSaves.length >= 6) return res.status(401).json({error : "Слишком много сохранений"});
     const save = new Save({user, frame});
     await save.save();
     return res.status(201).json({message : "Успешно сохранено"})
