@@ -7,7 +7,7 @@ const userRouter = Router();
 // к пути(маршруту) регистрации подключается функция регистрации. с авториз. тоже самое
 userRouter.post('/registration', registration);
 userRouter.post('/authorization', authorization);
-userRouter.post('/save', save);
+userRouter.post('/save', auth, save);
 userRouter.get('/me', auth, me);
 
 module.exports = {
