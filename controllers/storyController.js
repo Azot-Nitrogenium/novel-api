@@ -55,9 +55,18 @@ const addAnswerWay = async (req, res) => {
     return res.status(404).json({message : "Отсутствуют нужные слайды"});
 }
 
+const deleteFrame = async (req, res) => {
+    if(!req.body) return res.status(400).json({error : "Нет данных"});
+    const { frame } = req.body;
+    const deleted = await Frame.findByIdAndDelete(frame);
+    if(!deleted) res.status(404).json({message : "Отсутствует слайд"});
+    return res.status(200).json({message : "Удалено"}); 
+}
+
 module.exports = {
     getStory,
     addFrame,
     addWay,
-    addAnswerWay
+    addAnswerWay,
+    deleteFrame
 }
